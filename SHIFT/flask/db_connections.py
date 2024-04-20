@@ -3,8 +3,12 @@ import flask
 import base64
 from PIL import Image
 import io
+from flask_cors import CORS
+
+
 
 app = flask.Flask(__name__)
+CORS(app)
 
 StatusCodes = {
     'success': 200,
@@ -114,7 +118,7 @@ def get_all_proposals():
         if conn is not None:
             conn.close()
             
-    return flask.jsonify(response);
+    return flask.jsonify(response)
 
 @app.route("/proposals/<id>", methods=['GET'])
 def get_user_proposals(id):
@@ -194,7 +198,7 @@ def get_accepted_proposals(id):
         if conn is not None:
             conn.close()
             
-    return flask.jsonify(response);
+    return flask.jsonify(response)
 
 @app.route("/show_image/<proposal_id>")
 def show_image(proposal_id):

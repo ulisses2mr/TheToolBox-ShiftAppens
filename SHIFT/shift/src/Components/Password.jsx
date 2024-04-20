@@ -20,7 +20,7 @@ export const Password = ({ value, onChange}) => (
         />
         <button 
             className="login-page-box-inputs-password-show_button " 
-            src={show}  
+             
             onClick={changeVis}
         />
     </div>
