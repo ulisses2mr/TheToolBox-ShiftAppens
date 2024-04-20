@@ -14,16 +14,16 @@ function Offers() {
                 },
             });
     
-            // Check if the response is successful
+            // Verifique se a resposta foi bem-sucedida
             if (response.ok) {
-                //const data = await response.json();
-                console.log(response); // Log the data received from the server
-                // Proceed with handling the data, updating UI, etc.
+                const data = await response.json();
+                console.log(data.results[0]); // Imprime os dados retornados no console
+                // Você pode fazer algo com os dados, como atualizar a interface do usuário
             } else {
-                console.error('Error getting proposals:', response.status);
+                console.error('Erro ao obter propostas:', response.status);
             }
         } catch (error) {
-            console.error('Error fetching proposals:', error.message);
+            console.error('Erro na requisição:', error.message);
         }
     }
 
