@@ -7,6 +7,8 @@ from flask_cors import CORS
 
 app = flask.Flask(__name__)
 CORS(app, resources={r"/proposals": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/new_proposal": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/requests": {"origins": "http://localhost:3000"}})
 
 StatusCodes = {
     'success': 200,
