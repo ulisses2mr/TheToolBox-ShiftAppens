@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Offers from './Offers/Offers';
 import Loan from './Loan/Loan';
-
+import Request from './Request/Request';
 
 
 
@@ -14,6 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/loan" element={<Loan/>} />
         <Route path="/offers" element={<Offers/>} />
+        <Route path="/request" element={<Request/>} />
       </Routes>
     </BrowserRouter>
   );

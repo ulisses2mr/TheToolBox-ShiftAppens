@@ -3,6 +3,11 @@
     src: url('../../Assets/futura/Futura\ Bold\ font.ttf');
 }
 
+body{
+    padding-top: 20vh;
+
+}
+
 .navbar_component{
 
     height: 20%;
