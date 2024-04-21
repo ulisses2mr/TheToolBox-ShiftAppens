@@ -44,7 +44,7 @@ const Navbar = () => (
    <img class="menu_element" src={Profile} onClick={toProfile}></img>
    <img class="menu_element" src={Add} onClick={toLoan}></img>
    </div>
-   <img id="menu_logo" src={Logo}></img>
+   <img id="menu_logo" src={Logo} onClick={toOffers}></img>
     </div>
 );
 
