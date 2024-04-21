@@ -1,6 +1,12 @@
 .requests_page{
     height: 80vh;
+    --color-brown: #191308;
+  --color-white: #ecebe4;
+  --color-red: #982c1f;
+  --color-orange: #c1452d;
+  --bg-alt: #c9c9c9;
 }
+
 #Request_container{
     box-sizing: border-box;
     padding-left: 10%;
@@ -10,6 +16,16 @@
     justify-content: space-between;
     height: 100%;
 }
+
+#left_section{
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
 #user{
     width:100%;
     height: 15%;
@@ -26,15 +42,10 @@
 }
 #tool_image img{
     height:90%;
-    width:auto;
+    width:auto; 
     max-width:90%;
 }
-#left_section{
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
+
 
 #pfp{
     background-color: var(--color-orange);
@@ -50,10 +61,14 @@
     color: var(--color-orange);
     font-size: 1.5em;
 }
-
+#Request_name{
+    margin-top: 3%;
+    margin-bottom: 4%;
+}
 #Request_name>h2{
     margin-top: 0;
     margin-left: 2%;
+    margin-bottom: 0;
     font-size: 2.5em;
     color: var(--color-red);
     display: inline-block;
@@ -77,16 +92,18 @@
     padding: 8px;
     background-color: var(--bg-alt);
     border: 0;
+    margin-top: 2%;
 }
 #Message_Box:focus{
     outline:0;
 }
 
-#Request_container>div:last-child{
+#left_section>div:last-child{
     display: flex;
     justify-content: space-between;
     height: 10%;
     width: 100%;
+    margin-top: 5%;
 }
 #balance{
     width:30%;
