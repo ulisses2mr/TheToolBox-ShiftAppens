@@ -1,17 +1,22 @@
+body{
+  overflow-x: hidden;
+}
+
 .offers_page {
   --color-brown: #191308;
   --color-white: #ecebe4;
   --color-red: #982c1f;
   --color-orange: #c1452d;
   --bg-alt: #c9c9c9;
-}
-
-.offers_page {
   background-color: var(--color-brown);
   padding: 0;
   margin: 0;
   overflow: hidden;
   min-height: 100vh;
+
+  display: flex;
+  justify-content: center;  
+  flex-wrap: wrap;
 }
 
 #banner {
@@ -21,10 +26,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+#treadmill, #treadmill2{
+  position: absolute;
+  top: 0;
+  left:0;
+  height:400px;
+  width:100%;
+  animation:slide 15s linear infinite;
+
+}
+#treadmill2{
+  left:100%;
 }
 
-#banner > img {
-  position: absolute;
+@keyframes slide {
+  0%{
+    transform: translate(0);
+  }
+
+  100%{
+    transform: translate(-100%);
+  }
 }
 
 .search_bar {
@@ -58,12 +82,20 @@
   border: 4px solid var(--color-red);
 }
 .search_bar>button{
+    width:10%;
+    height: 70%;
     top:50%;
-    right:5%;
+    right:3%;
     transform: translate(0,-50%);
     position:absolute;
     border: none;
-    background-color: none;
+    background-color: var(--color-white);
+    padding:0;
+    pointer-events: none;
+}
+#lupa{
+  width: 100%;
+  height:100%;
 }
 
 
@@ -71,23 +103,22 @@
 
 #Off_Req_container {
   width: 90%;
-  padding: 0;
-  margin-left: 5%;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
 }
-#Lending,
-#Borrowing {
-  width: 45%;
-  height: 100%;
+.PostList{
+  width: 47%;
   display: inline-flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   flex-wrap: wrap;
-}
-#Lending {
-  margin-right: 10%;
+  align-items: flex-start;
 }
 
-#Lending > h2,
-#Borrowing > h2 {
+
+.PostList > h2 {
   color: var(--color-white);
 }
 
@@ -102,12 +133,12 @@
 .unit:nth-child(2n) {
   background-color: var(--bg-alt);
 }
-.unit, .unit_left, .unit_right{
+.unit, .unit_right{
     justify-content: space-between;
 }
 .unit_left, .unit_right{
     height:100%;
-    width: 45%;
+    width: 50%;
     display: flex;
     align-items: center;
 }
@@ -122,4 +153,11 @@
 }
 .unit:nth-child(2n) .pfp {
   background-color: var(--color-white);
+}
+.username{
+  margin-left: 3%;
+}
+.unit img{
+  height:45px;
+  width:auto;
 }
