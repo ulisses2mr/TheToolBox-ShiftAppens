@@ -3,7 +3,7 @@ import Menu from '../../Assets/menubutton.svg'
 import Add from '../../Assets/menuadd.svg'
 import Home from '../../Assets/menuhome.svg'
 import Profile from '../../Assets/menuprofile.svg'
-import Logo from '../../Assets/menulogo.svg'
+import Logo from '../../Assets/logothetool.svg'
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 

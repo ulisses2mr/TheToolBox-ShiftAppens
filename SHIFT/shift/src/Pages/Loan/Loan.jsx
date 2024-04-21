@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import './Loan.css';
-import Navbar from '../Components/Navbar/Navbar.jsx';
-import Mapa from '../Components/Mapa/Mapa.jsx';
-import ImagemLado from '../Assets/elementloan.svg';
-
+import Navbar from '../../Components/Navbar/Navbar.jsx';
+import Mapa from '../../Components/Mapa/Mapa.jsx';
+import ImagemLado from '../../Assets/elementloan.svg';
+import Butt from '../../Assets/boton.svg';
 function Loan() {
     const [location, setLocation] = useState("Coimbra");
     const [user_id, setUser_id] = useState(1);
     const [is_offer, setIs_offer] = useState(true); // true - offer request - false
     const [brand, setBrand] = useState("");
-    const [tool_type, setToll_type] = useState("");
+    const [tool_type, setToll_type] = useState();
     const [url, setUrl] = useState("");
+    
 
     const create = async () => {
         try {
             const offerData = {
                 date_start: "Sat, 27 Apr 2024 00:00:00 GMT",
-                user_id: user_id,
-                brand: brand,
-                tool_type: tool_type
+                utilizador_id: 2,
+                ferramenta_id: tool_type
             };
             if (is_offer)  {setUrl('http://127.0.0.1:8080/new_proposal');}
             else {setUrl('http://127.0.0.1:8080/new_request');}
@@ -32,7 +32,8 @@ function Loan() {
 
             if (response.ok) {
                 console.log(response);
-                const data = await response.json();
+                console.log(offerData);
+                window.location.href = '/offers';
             } else {
                 console.error('Error in response to filter proposals:', response.status);
             }
@@ -47,6 +48,9 @@ function Loan() {
         console.log(is_offer)
         console.log(brand)
         console.log(tool_type)
+        if (tool_type=="hammer") setToll_type(1);
+        if (tool_type=="tool case") setToll_type(2);
+        if (tool_type=="drill") setToll_type(3);
         create();
     }
 
@@ -55,11 +59,13 @@ function Loan() {
             <Navbar />
             
             <div className="form_loan">
-                <h1>CREATE A POST</h1>
-                <select name="request_dropdown" className="dropdown_element" id="request_dropdown">
-                    <option value="request_option">Request</option>
-                    <option value="loan_option">Loan</option>
+           <div className="title_loan"> <h1>CREATE A </h1>   <select name="tool_dropdown"  id="button_request" onChange={(e) => setToll_type(e.target.value)}>
+                    <option value="hammer">REQUEST</option>
+                    <option value="tool case">LOAN</option>
+                   
                 </select>
+           </div>
+              
                 <select name="tool_dropdown" className="dropdown_element" id="tool_dropdown" onChange={(e) => setToll_type(e.target.value)}>
                     <option value="hammer">Hammer</option>
                     <option value="tool case">Tool Case</option>
@@ -69,7 +75,7 @@ function Loan() {
                     <option value="bosch">Bosch</option>
                     <option value="dexter">Dexter</option>
                 </select>
-                <button id="button_loan" onClick={handleSubmit}>SUBMIT</button>
+                <a id="button_loan" onClick={handleSubmit}><img  src={Butt} ></img></a>
             </div>
       
 

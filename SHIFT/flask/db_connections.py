@@ -10,6 +10,9 @@ app = flask.Flask(__name__)
 CORS(app, resources={r"/proposals": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/new_proposal": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/requests": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/user_info/1": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/user_info/2": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/user_info/3": {"origins": "http://localhost:3000"}})
 
 StatusCodes = {
     'success': 200,
@@ -156,7 +159,7 @@ def create_tool():
 @app.route("/new_proposal", methods=['POST'])
 def create_proposal():
     payload = flask.request.get_json()
-
+    print(payload)
     conn = db_connection()
     cur = conn.cursor()
 
@@ -164,8 +167,8 @@ def create_proposal():
         response = {'status': StatusCodes['api_error'], 'results': 'id value not in payload'}
         return flask.jsonify(response)
 
-    id = random.randint(2,1000)
-    date_start = payload['date_start']
+    id = random.randint(1,2000)
+    date_start = '2024-04-21'
     ferramenta_id = payload['ferramenta_id']
     utilizador_id = payload['utilizador_id']
 
