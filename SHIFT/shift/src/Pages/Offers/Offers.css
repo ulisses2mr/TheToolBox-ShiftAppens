@@ -121,4 +121,6 @@ body{
 
 .PostList > h2 {
   color: var(--color-white);
+  margin-left: 50%;
+  transform: translate(-50%);
 }
