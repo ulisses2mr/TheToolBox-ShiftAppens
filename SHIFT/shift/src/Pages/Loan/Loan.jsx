@@ -3,7 +3,7 @@ import './Loan.css';
 import Navbar from '../../Components/Navbar/Navbar.jsx';
 import Mapa from '../../Components/Mapa/Mapa.jsx';
 import ImagemLado from '../../Assets/elementloan.svg';
-
+import Butt from '../../Assets/boton.svg';
 function Loan() {
     const [location, setLocation] = useState("Coimbra");
     const [user_id, setUser_id] = useState(1);

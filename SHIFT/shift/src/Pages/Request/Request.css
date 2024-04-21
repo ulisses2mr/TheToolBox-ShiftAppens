@@ -1,0 +1,25 @@
+.requests_page{
+    height: 80vh;
+}
+#Request_container{
+    box-sizing: border-box;
+    padding-left: 7.5%;
+    padding-top: 3%;
+    display:flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+#tool_image{
+    width:30%;
+    height: 96%;
+    background-color: var(--bg-alt);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#tool_image img{
+    height:90%;
+    width:auto;
+}
+
