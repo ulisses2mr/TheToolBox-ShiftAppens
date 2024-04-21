@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Loan.css';
 import Navbar from '../Components/Navbar/Navbar.jsx';
+import Mapa from '../Components/Mapa/Mapa.jsx';
 import ImagemLado from '../Assets/elementloan.svg';
 
 function Loan() {
@@ -52,6 +53,7 @@ function Loan() {
     return (
         <div className="loan_page">
             <Navbar />
+            
             <div className="form_loan">
                 <h1>CREATE A POST</h1>
                 <select name="request_dropdown" className="dropdown_element" id="request_dropdown">
@@ -69,6 +71,7 @@ function Loan() {
                 </select>
                 <button id="button_loan" onClick={handleSubmit}>SUBMIT</button>
             </div>
+      
 
             <div id="imagem_container_loan"><img className="imagem_lado" src={ImagemLado} alt="Loan side image" /></div>
         </div>
