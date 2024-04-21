@@ -18,7 +18,6 @@ function Loan() {
     const create = async () => {
         try {
             const offerData = {
-                date_start: "Sat, 27 Apr 2024 00:00:00 GMT",
                 utilizador_id: 2,
                 ferramenta_id: tool_type
             };
