@@ -22,7 +22,7 @@ top:0;
     height: 100%;
     display: flex;
     align-items: center;
-
+width: 50%;
 
 }
 #menu_text{
@@ -37,20 +37,20 @@ top:0;
 }
 .menu_element{
 display: none;
+height: 70%;
 }
-.menu_element, #menu_logo{
+ #menu_logo{
     height: 100%;
    
    }
 
-.menu_element:hover{
+   .menu_element:hover {
     cursor: pointer;
-    filter: saturate(20);
-   
+    filter: opacity(50%);
 }
 #menu_logo:hover, #menu_icon:hover{
     cursor: pointer;
-    filter: saturate(50);
+    filter: opacity(50%);
    
    
 }

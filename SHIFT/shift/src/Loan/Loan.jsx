@@ -64,7 +64,8 @@ function Loan() {
                 </select>
                 <button id="button_loan" onClick={handleSubmit}>SUBMIT</button>
             </div>
-            <div><img className="imagem_lado" src={ImagemLado} alt="Loan side image" /></div>
+
+            <div id="imagem_container_loan"><img className="imagem_lado" src={ImagemLado} alt="Loan side image" /></div>
         </div>
     );
 }
