@@ -242,9 +242,9 @@ def get_all_proposals():
     cur = conn.cursor()
     
     try:
-        cur.execute("""select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, photo
-                    from oferta, ferramenta
-                    where isProposal = 1 and ferramenta_id = ferramenta.id;""")
+        cur.execute("""select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, location, photo
+                    from oferta, ferramenta, emprestimo_ferramenta_toolbox as t, toolbox
+                    where oferta.id = t.oferta_id and toolbox.id = t.toolbox_id and isProposal = 1 and ferramenta_id = ferramenta.id;""")
         
         rows = cur.fetchall()
         
@@ -261,7 +261,8 @@ def get_all_proposals():
                 "ferramenta_price": float(row[4]),
                 "utilizador_id": int(row[5]),
                 "date_start": row[6],
-                "ferramenta_photo": base64.b64encode(row[7]).decode('utf-8')
+                "location": row[7],
+                "ferramenta_photo": base64.b64encode(row[8]).decode('utf-8')
                 #"ferramenta_photo": row[8]    
             }
             
@@ -329,9 +330,9 @@ def get_user_proposals(id):
     cur = conn.cursor()
     
     try:
-        statement = """select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, photo
-                    from oferta, ferramenta
-                    where isProposal = 1 and ferramenta_id = ferramenta.id and utilizador_id = %s;"""
+        statement = """select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, location, photo
+                    from oferta, ferramenta, emprestimo_ferramenta_toolbox as t, toolbox
+                    where oferta.id = t.oferta_id and toolbox.id = t.toolbox_id and isProposal = 1 and ferramenta_id = ferramenta.id and utilizador_id = %s;"""
         
         cur.execute(statement, (id,))
         
@@ -346,8 +347,11 @@ def get_user_proposals(id):
                 "ferramenta_type": row[2],
                 "ferramenta_brand": row[3],
                 "ferramenta_price": float(row[4]),
-                "date_start": row[5],
-                "ferramenta_photo": base64.b64encode(row[6]).decode('utf-8')
+                "utilizador_id": int(row[5]),
+                "date_start": row[6],
+                "location": row[7],
+                "ferramenta_photo": base64.b64encode(row[8]).decode('utf-8')
+                #"ferramenta_photo": row[8]    
                 #"ferramenta_photo": row[8]    
             }
             
@@ -388,8 +392,9 @@ def get_user_requests(id):
                 "ferramenta_type": row[2],
                 "ferramenta_brand": row[3],
                 "ferramenta_price": float(row[4]),
-                "date_start": row[5],
-                "ferramenta_photo": base64.b64encode(row[6]).decode('utf-8')
+                "utilizador_id": row[5],
+                "date_start": row[6],
+                "ferramenta_photo": base64.b64encode(row[7]).decode('utf-8')
                 #"ferramenta_photo": row[8]    
             }
             
@@ -453,9 +458,9 @@ def search_by_type(search):
     cur = conn.cursor()
     
     try:
-        statement = f"""select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, photo
-                    from oferta, ferramenta
-                    where isProposal = 1 and ferramenta_id = ferramenta.id and ferramenta_type like '{search}%';"""
+        statement = f"""select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, location, photo
+                        from oferta, ferramenta, emprestimo_ferramenta_toolbox as t, toolbox
+                        where oferta.id = t.oferta_id and toolbox.id = t.toolbox_id and isProposal = 1 and ferramenta_id = ferramenta.id and ferramenta_type like '{search}%';"""
         
         cur.execute(statement, tuple())
 
@@ -471,11 +476,12 @@ def search_by_type(search):
                 "ferramenta_price": float(row[4]),
                 "utilizador_id": int(row[5]),
                 "date_start": row[6],
-                "ferramenta_photo": base64.b64encode(row[7]).decode('utf-8')
+                "location": row[7],
+                "ferramenta_photo": base64.b64encode(row[8]).decode('utf-8')
                 #"ferramenta_photo": row[8]    
             }
         
-        results.append(content)
+            results.append(content)
         
         response = {'status': StatusCodes['success'], 'results': results}
         
@@ -496,7 +502,7 @@ def search_by_location(search):
     cur = conn.cursor()
     
     try:
-        statement = f"""select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, photo, location
+        statement = f"""select oferta.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, location, photo
                         from oferta, ferramenta, emprestimo_ferramenta_toolbox as t, toolbox
                         where oferta.id = t.oferta_id and toolbox.id = t.toolbox_id and isProposal = 1 and location like '{search}%';"""
         
@@ -514,8 +520,8 @@ def search_by_location(search):
                 "ferramenta_price": float(row[4]),
                 "utilizador_id": int(row[5]),
                 "date_start": row[6],
-                "ferramenta_photo": base64.b64encode(row[7]).decode('utf-8'),
-                "location": row[8]
+                "location": row[7],
+                "ferramenta_photo": base64.b64encode(row[8]).decode('utf-8')
                 #"ferramenta_photo": row[8]    
             }
         
@@ -532,6 +538,74 @@ def search_by_location(search):
     
     return flask.jsonify(response)
 
+
+@app.route("/requests/type/<search>", methods=['GET'])
+def search_by_type_req(search):
+    conn = db_connection()
+    cur = conn.cursor()
+    
+    try:
+        statement = f"""select pedido.id, ferramenta_id, ferramenta_type, brand, price, utilizador_id, date_start, photo
+                    from pedido, ferramenta
+                    where isProposal = 1 and ferramenta_id = ferramenta.id and ferramenta_type like '{search}%';"""
+        
+        cur.execute(statement, tuple())
+
+        rows = cur.fetchall()
+        results = []
+        
+        for row in rows:
+            content = {
+                "id": int(row[0]), 
+                "ferramenta_id": int(row[1]), 
+                "ferramenta_type": row[2],
+                "ferramenta_brand": row[3],
+                "ferramenta_price": float(row[4]),
+                "utilizador_id": int(row[5]),
+                "date_start": row[6],
+                "ferramenta_photo": base64.b64encode(row[7]).decode('utf-8')
+                #"ferramenta_photo": row[8]    
+            }
+        
+            results.append(content)
+        
+        response = {'status': StatusCodes['success'], 'results': results}
+        
+    except (Exception, sdb.DatabaseError) as error:
+        response = {'status': StatusCodes['internal_error'], 'errors': str(error)}
+        
+    finally:
+        if conn is not None:
+            conn.close()
+    
+    return flask.jsonify(response)
+
+
+
+@app.route("/proposals/accept/<id>", methods=['PUT'])
+def accept_proposal(id):
+    conn = db_connection()
+    cur = conn.cursor()
+    
+    try:
+        statement = """update oferta
+                    set isProposal = 0
+                    where id = %s;"""
+                    
+        cur.execute(statement, (id, ))
+        response = {'status': StatusCodes['success'], 'results': f'Updated: {cur.rowcount}'}
+        
+        conn.commit()
+    except (Exception, sdb.DatabaseError, ValueError) as error:
+        response = {'status': StatusCodes['internal_error'], 'errors': str(error)}
+        
+        conn.rollback()
+        
+    finally:
+        if conn is not None:
+            conn.close()
+    
+    return flask.jsonify(response)
 
 
 
@@ -573,6 +647,8 @@ def show_image(proposal_id):
             conn.close()
     
     return flask.jsonify(response)
+
+
 
 
 
