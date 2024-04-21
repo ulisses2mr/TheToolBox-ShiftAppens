@@ -2,25 +2,58 @@ import React, { useEffect, useState } from "react";
 import "./Offers.css";
 
 function Offers() {
-  const getProposals = async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:8080/proposals", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    const [offers,setOffers] = useState([]);
+    
+    const getProposals = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:8080/requests', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-      // Verifique se a resposta foi bem-sucedida
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data.results[0]); // Imprime os dados retornados no console
-        // Você pode fazer algo com os dados, como atualizar a interface do usuário
-      } else {
-        console.error("Erro ao obter propostas:", response.status);
-      }
-    } catch (error) {
-      console.error("Erro na requisição:", error.message);
+            if (response.ok) {
+                const data = await response.json();
+                //console.log(Object.keys(data.results[0]))
+                let param = (Object.keys(data.results[0]));
+                console.log(param)
+                for (let i=0; i < (data.results).length; i++){
+                    (data.results[i]).date_start
+                    //console.log(data.results[i])
+                    
+                }
+                
+                setOffers(data.results[0].date_start);
+            } else {
+                console.error('Error in reponse to get proposals:', response.status);
+            }
+        } catch (error) {
+            console.error('Error trying  getting proposals:', error.message);
+        }
+    }
+
+
+
+    // Associar à Navbar
+    const filterProposals = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:8080/proposals', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setOffers(data.results);
+            } else {
+                console.error('Error in reponse to filter proposals:', response.status);
+            }
+        } catch (error) {
+            console.error('Error filtering the proposals:', error.message);
+        }
     }
   };
 
@@ -28,58 +61,12 @@ function Offers() {
     //getProposals();
   }, []);
 
-  return (
-    <div className="offers_page">
-      <div id="banner">
-        <img></img>
-        <img></img>
-
-        <div className="search_bar">
-          <div className="search_Backdrop"></div>
-          
-          <input type="text" placeholder="Search.."></input>
-          <button className="searchBtn">
-            <img src=""></img>
-          </button>
-        </div>
+    return (
+      <div className="login_page">
+        <h1>{offers}</h1>
+        
       </div>
-
-      <div id="Off_Req_container">
-        <div id="Lending">
-          <h2>Lending</h2>
-         
-          <div className="unit Have">
-            <div className="unit_left">
-            <div className="pfp"></div>
-            <p>User X has a Pixa</p>
-            </div>
-            <div className="unit_right">
-            <p>5.9Km</p>
-            <img src="" alt="tool_image" />
-            </div>
-          </div>
-          
-          
-        </div>
-
-        <div id="Borrowing">
-          <h2>Borrowing</h2>
-
-          <div className="unit Have">
-            <div className="unit_left">
-            <div className="pfp"></div>
-            <p>User X has a Pixa</p>
-            </div>
-            <div className="unit_right">
-            <p>5.9Km</p>
-            <img src="" alt="tool_image" />
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Offers;
+    );
+  }
+  
+  export default Offers;
