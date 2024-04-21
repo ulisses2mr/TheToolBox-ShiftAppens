@@ -4,17 +4,24 @@ import Navbar from '../Components/Navbar/Navbar.jsx';
 import ImagemLado from '../Assets/elementloan.svg';
 
 function Loan() {
-    const [location, setLocation] = useState("loc");
-    const [user_id, setUser_id] = useState("dqqe");
+    const [location, setLocation] = useState("Coimbra");
+    const [user_id, setUser_id] = useState(1);
+    const [is_offer, setIs_offer] = useState(true); // true - offer request - false
+    const [brand, setBrand] = useState("");
+    const [tool_type, setToll_type] = useState("");
+    const [url, setUrl] = useState("");
 
     const create = async () => {
         try {
             const offerData = {
-                location: location,
+                date_start: "Sat, 27 Apr 2024 00:00:00 GMT",
                 user_id: user_id,
+                brand: brand,
+                tool_type: tool_type
             };
-
-            const response = await fetch('http://127.0.0.1:8080/new_proposal', {
+            if (is_offer)  {setUrl('http://127.0.0.1:8080/new_proposal');}
+            else {setUrl('http://127.0.0.1:8080/new_request');}
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -25,7 +32,6 @@ function Loan() {
             if (response.ok) {
                 console.log(response);
                 const data = await response.json();
-                // Handle successful response if needed
             } else {
                 console.error('Error in response to filter proposals:', response.status);
             }
@@ -35,6 +41,11 @@ function Loan() {
     }
 
     const handleSubmit = () => {
+        console.log(location) 
+        console.log(user_id)
+        console.log(is_offer)
+        console.log(brand)
+        console.log(tool_type)
         create();
     }
 
@@ -47,20 +58,14 @@ function Loan() {
                     <option value="request_option">Request</option>
                     <option value="loan_option">Loan</option>
                 </select>
-                <select name="tool_dropdown" className="dropdown_element" id="tool_dropdown">
-                    <option value="tool_option">Hammer</option>
-                    <option value="tool_option">Screwdriver</option>
-                    <option value="tool_option">Wrench</option>
+                <select name="tool_dropdown" className="dropdown_element" id="tool_dropdown" onChange={(e) => setToll_type(e.target.value)}>
+                    <option value="hammer">Hammer</option>
+                    <option value="tool case">Tool Case</option>
+                    <option value="drill">Drill</option>
                 </select>
-                <select name="marca_dropdown" className="dropdown_element" id="marca_dropdown">
-                    <option value="marca_option">Pixa</option>
-                    <option value="marca_option">Pixa</option>
-                    <option value="marca_option">Pixa</option>
-                </select>
-                <select name="model_dropdown" className="dropdown_element" id="model_dropdown">
-                    <option value="model_option" className="model_option">Pixa</option>
-                    <option value="model_option" className="model_option">Pixa</option>
-                    <option value="model_option" className="model_option">Pixa</option>
+                <select name="marca_dropdown" className="dropdown_element" id="marca_dropdown" onChange={(e) => setBrand(e.target.value)}>
+                    <option value="bosch">Bosch</option>
+                    <option value="dexter">Dexter</option>
                 </select>
                 <button id="button_loan" onClick={handleSubmit}>SUBMIT</button>
             </div>

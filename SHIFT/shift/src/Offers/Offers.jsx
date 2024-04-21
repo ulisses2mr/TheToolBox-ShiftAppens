@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from '../Components/Navbar/Navbar.jsx';
 import "./Offers.css";
-import ImagemLupa from "../Assets/lupa-04.svg";
-import bgTreadmill from "../Assets/bg_passadeira.png";
+import ImagemLupa from '../Assets/lupa-04.svg';
+import bgTreadmill from '../Assets/bg_passadeira.png';
+import Offer_Card from "../Components/Cards/Cards.jsx";
 
 function Offers() {
   const [offers, setOffers] = useState([]);
@@ -96,33 +97,14 @@ function Offers() {
       <div id="Off_Req_container">
         <div className="PostList" id="Lending">
           <h2>Lending</h2>
-          
-          <a href="#"   className="unit Have">
-            <div className="unit_left">
-              <div className="pfp"></div>
-              <p className="username">User X has a Pixa</p>
-            </div>
-            <div className="unit_right">
-              <b>5.9Km</b>
-              <img src={ImagemLupa} alt="tool_image" />
-            </div>
-          </a>
+          <Offer_Card username="JohnDoe" location="New York" />
           
         </div>
 
         <div className="PostList" id="Borrowing">
           <h2>Borrowing</h2>
-
-          <a href="#" className="unit Need">
-            <div className="unit_left">
-              <div className="pfp"></div>
-              <p className="username">User X needs a pixa</p>
-            </div>
-            <div className="unit_right">
-              <b>5.9Km</b>
-              <img src={ImagemLupa} alt="tool_image" />
-            </div>
-          </a>
+          <Offer_Card username="JohnDoe" location="New York" />
+          
 
 
         </div>
