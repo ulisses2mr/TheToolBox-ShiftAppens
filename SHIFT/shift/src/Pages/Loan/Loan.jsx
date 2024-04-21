@@ -3,11 +3,13 @@ import './Loan.css';
 import Navbar from '../../Components/Navbar/Navbar.jsx';
 import Mapa from '../../Components/Mapa/Mapa.jsx';
 import ImagemLado from '../../Assets/elementloan.svg';
+
 import Butt from '../../Assets/boton.svg';
+
 function Loan() {
     const [location, setLocation] = useState("Coimbra");
     const [user_id, setUser_id] = useState(1);
-    const [is_offer, setIs_offer] = useState(true); // true - offer request - false
+    const [is_offer, setIs_offer] = useState(); // true - offer request - false
     const [brand, setBrand] = useState("");
     const [tool_type, setToll_type] = useState();
     const [url, setUrl] = useState("");
@@ -16,12 +18,11 @@ function Loan() {
     const create = async () => {
         try {
             const offerData = {
-                date_start: "Sat, 27 Apr 2024 00:00:00 GMT",
                 utilizador_id: 2,
                 ferramenta_id: tool_type
             };
-            if (is_offer)  {setUrl('http://127.0.0.1:8080/new_proposal');}
-            else {setUrl('http://127.0.0.1:8080/new_request');}
+            if (is_offer)  {setUrl('http://127.0.0.1:8080/new_request');}
+            else {setUrl('http://127.0.0.1:8080/new_proposal');}
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -51,6 +52,8 @@ function Loan() {
         if (tool_type=="hammer") setToll_type(1);
         if (tool_type=="tool case") setToll_type(2);
         if (tool_type=="drill") setToll_type(3);
+        if (is_offer==="1") setIs_offer(true);
+        else setIs_offer(false);
         create();
     }
 
@@ -59,9 +62,10 @@ function Loan() {
             <Navbar />
             
             <div className="form_loan">
-           <div className="title_loan"> <h1>CREATE A </h1>   <select name="tool_dropdown"  id="button_request" onChange={(e) => setToll_type(e.target.value)}>
-                    <option value="hammer">REQUEST</option>
-                    <option value="tool case">LOAN</option>
+           <div className="title_loan"> <h1>CREATE A </h1>   
+           <select name="tool_dropdown"  id="button_request" onChange={(e) => setIs_offer(e.target.value)}>
+                    <option value="1">REQUEST</option>
+                    <option value="2">LOAN</option>
                    
                 </select>
            </div>
