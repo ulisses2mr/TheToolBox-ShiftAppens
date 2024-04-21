@@ -18,14 +18,30 @@ function Offers() {
                 const data = await response.json();
                 //console.log(Object.keys(data.results[0]))
                 let param = (Object.keys(data.results[0]));
+                console.log("Keys")
                 console.log(param)
+
+                let proposal_data = []
                 for (let i=0; i < (data.results).length; i++){
-                    (data.results[i]).date_start
-                    //console.log(data.results[i])
+                    let date = (data.results[i]).date_start
+                    let brand = (data.results[i]).ferramenta_brand
+                    let tool_id = (data.results[i]).ferramenta_id
+                    let photo = (data.results[i]).ferramenta_photo
+                    let type = (data.results[i]).ferramenta_price
+                    let id = (data.results[i]).id
+                    let user_id = (data.results[i]).utilizador_id
+                    console.log("Data results")
+                    console.log(date, brand, tool_id, type, id, user_id)
+                    console.log(data.results[i])
                     
+                    let img = new Image()
+                    img.src = "data:image/png;base64," + photo;
+
+                    proposal_data = [date, brand, tool_id, type, id, user_id, img]
                 }
                 
-                setOffers(data.results[0].date_start);
+                //setOffers(data.results[0].date_start);
+                setOffers(proposal_data)
             } else {
                 console.error('Error in reponse to get proposals:', response.status);
             }
