@@ -4,6 +4,7 @@ import base64
 from PIL import Image
 import io
 from flask_cors import CORS
+import random
 
 app = flask.Flask(__name__)
 CORS(app, resources={r"/proposals": {"origins": "http://localhost:3000"}})
@@ -163,7 +164,7 @@ def create_proposal():
         response = {'status': StatusCodes['api_error'], 'results': 'id value not in payload'}
         return flask.jsonify(response)
 
-    id = payload['id']
+    id = random.randint(2,1000)
     date_start = payload['date_start']
     ferramenta_id = payload['ferramenta_id']
     utilizador_id = payload['utilizador_id']
@@ -193,6 +194,7 @@ def create_proposal():
             conn.close()
 
     return flask.jsonify(response)
+
 
 @app.route("/new_request", methods=['POST'])
 def create_request():
