@@ -4,7 +4,10 @@
     display:flex;
     align-items: center;
     padding: 10px ;
-    
+    text-decoration: none;
+  }
+  .unit:visited{
+    color: #000000;
   }
   .unit:nth-child(2n) {
     background-color: var(--bg-alt);
