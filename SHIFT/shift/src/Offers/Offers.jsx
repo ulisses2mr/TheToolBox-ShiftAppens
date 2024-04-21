@@ -7,48 +7,134 @@ import Offer_Card from "../Components/Cards/Cards.jsx";
 
 function Offers() {
   const [offers, setOffers] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [userName, setUserName] = useState(null);
+  let users = {};
+
+  async function getUser(id) {
+    try {
+      const response = await fetch(`http://127.0.0.1:8080/user_info/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.results)
+
+        let name = (data.results).name;
+        console.log("Name:", name)
+
+        users[id] = name;
+
+      } else {
+        console.error('Error in reponse to get user name:', response.status);
+      } 
+    } catch (error) {
+      console.error('Error trying  getting user name:', error.message);
+    }
+  }
+
 
   const getProposals = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8080/requests", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        const response = await fetch('http://127.0.0.1:8080/proposals', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            //console.log(Object.keys(data.results[0]))
+            let param = (Object.keys(data.results[0]));
+            console.log("Keys")
+            console.log(param)
+
+            let proposal_data = []
+            for (let i=0; i < (data.results).length; i++){
+                let date = (data.results[i]).date_start
+                let brand = (data.results[i]).ferramenta_brand
+                let tool_id = (data.results[i]).ferramenta_id
+                let photo = (data.results[i]).ferramenta_photo
+                let price = (data.results[i]).ferramenta_price 
+                let type = (data.results[i]).ferramenta_type
+                let id = (data.results[i]).id
+                let location = (data.results[i]).location
+                let user_id = (data.results[i]).utilizador_id
+                
+                if (!(user_id in users)) {
+                  getUser(user_id);
+                }
+                //console.log("Data results")
+                //console.log(date, brand, tool_id, type, id, user_id)
+                //console.log(data.results[i])
+
+                proposal_data.push([date, brand, tool_id, price, type, id, location, user_id, users[user_id]])
+            }
+            
+            //setOffers(data.results[0].date_start);
+            console.log(proposal_data)
+            setOffers(proposal_data)
+        } else {
+            console.error('Error in reponse to get proposals:', response.status);
+        }
+    } catch (error) {
+        console.error('Error trying  getting proposals:', error.message);
+    }
+}
+
+const getRequests = async () => {
+  try {
+      const response = await fetch('http://127.0.0.1:8080/requests', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
       });
 
       if (response.ok) {
-        const data = await response.json();
-        //console.log(Object.keys(data.results[0]))
-        let param = Object.keys(data.results[0]);
-        console.log("Keys");
-        console.log(param);
+          const data = await response.json();
+          //console.log(Object.keys(data.results[0]))
+          let param = (Object.keys(data.results[0]));
+          console.log("Keys")
+          console.log(param)
 
-        let proposal_data = [];
-        for (let i = 0; i < data.results.length; i++) {
-          let date = data.results[i].date_start;
-          let brand = data.results[i].ferramenta_brand;
-          let tool_id = data.results[i].ferramenta_id;
-          let photo = data.results[i].ferramenta_photo;
-          let type = data.results[i].ferramenta_price;
-          let id = data.results[i].id;
-          let user_id = data.results[i].utilizador_id;
-          console.log("Data results");
-          console.log(date, brand, tool_id, type, id, user_id);
-          console.log(data.results[i]);
+          let request_data = []
+          for (let i=0; i < (data.results).length; i++){
+              let date = (data.results[i]).date_start
+              let brand = (data.results[i]).ferramenta_brand
+              let tool_id = (data.results[i]).ferramenta_id
+              let photo = (data.results[i]).ferramenta_photo
+              let price = (data.results[i]).ferramenta_price 
+              let type = (data.results[i]).ferramenta_type
+              let id = (data.results[i]).id
+              let user_id = (data.results[i]).utilizador_id
+              //console.log("Data results")
+              //console.log(date, brand, tool_id, type, id, user_id)
+              //console.log(data.results[i])
+              if (!(user_id in users)) {
+                getUser(user_id);
+              }
+              //console.log("Username")
+              //console.log(userName);
 
-          proposal_data = [date, brand, tool_id, type, id, user_id];
-        }
-
-        //setOffers(data.results[0].date_start);
-        setOffers(proposal_data);
+              request_data.push([date, brand, tool_id, price, type, id, user_id, users[user_id]]);
+          }
+          
+          //setOffers(data.results[0].date_start);
+          console.log(request_data)
+          setRequests(request_data)
       } else {
-        console.error("Error in reponse to get proposals:", response.status);
+          console.error('Error in reponse to get proposals:', response.status);
       }
-    } catch (error) {
-      console.error("Error trying  getting proposals:", error.message);
-    }
-  };
+  } catch (error) {
+      console.error('Error trying  getting proposals:', error.message);
+  }
+}
 
   // Associar à Navbar
   const filterProposals = async () => {
@@ -74,7 +160,9 @@ function Offers() {
 
   useEffect(() => {
     getProposals();
+    getRequests();
   }, []);
+
 
   return (
     <div className="offers_page">
@@ -97,18 +185,26 @@ function Offers() {
       <div id="Off_Req_container">
         <div className="PostList" id="Lending">
           <h2>Lending</h2>
-          <Offer_Card username="JohnDoe" location="New York" />
-          <Offer_Card username="JohnDoe" location="New York" />
-          <Offer_Card username="JohnDoe" location="New York" />
+          {offers.map((offer, index) => (
+            <Offer_Card
+              key={index}
+              username={ offer[offer.length - 1] }
+              location={offer[4]}
+            />
+          ))}
 
         </div>
 
         <div className="PostList" id="Borrowing">
           <h2>Borrowing</h2>
-          <Offer_Card username="JohnDoe" location="New York" />
+          {requests.map((request, index) => (
+            <Offer_Card
+              key={index}
+              username={ request[request.length - 1] }
+              location={request[4]}
+            />
+          ))}
           
-
-
         </div>
       </div>
     </div>

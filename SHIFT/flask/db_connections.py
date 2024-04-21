@@ -10,6 +10,9 @@ app = flask.Flask(__name__)
 CORS(app, resources={r"/proposals": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/new_proposal": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/requests": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/user_info/1": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/user_info/2": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/user_info/3": {"origins": "http://localhost:3000"}})
 
 StatusCodes = {
     'success': 200,
