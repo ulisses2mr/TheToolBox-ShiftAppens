@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Offers from './Offers/Offers';
-import Loan from './Loan/Loan';
-import Request from './Request/Request';
+import Offers from './Pages/Offers/Offers.jsx';
+import Loan from './Pages/Loan/Loan.jsx';
+import Request from './Pages/Request/Request.jsx';
 
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Components/Navbar/Navbar.jsx";
+import Navbar from '../../Components/Navbar/Navbar.jsx';
 import "./Request.css";
-import ImagemLupa from '../Assets/lupa-04.svg';
+import ImagemLupa from '../../Assets/lupa-04.svg';
 
 function Requests_page() {
   const [offers, setOffers] = useState([]);

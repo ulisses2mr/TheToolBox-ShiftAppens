@@ -159,7 +159,7 @@ def create_tool():
 @app.route("/new_proposal", methods=['POST'])
 def create_proposal():
     payload = flask.request.get_json()
-
+    print(payload)
     conn = db_connection()
     cur = conn.cursor()
 
@@ -167,8 +167,8 @@ def create_proposal():
         response = {'status': StatusCodes['api_error'], 'results': 'id value not in payload'}
         return flask.jsonify(response)
 
-    id = random.randint(2,1000)
-    date_start = payload['date_start']
+    id = random.randint(1,2000)
+    date_start = '2024-04-21'
     ferramenta_id = payload['ferramenta_id']
     utilizador_id = payload['utilizador_id']
 

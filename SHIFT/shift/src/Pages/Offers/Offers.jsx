@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Navbar from '../Components/Navbar/Navbar.jsx';
+import Navbar from '../../Components/Navbar/Navbar.jsx';
 import "./Offers.css";
-import ImagemLupa from '../Assets/lupa-04.svg';
-import bgTreadmill from '../Assets/bg_passadeira.png';
-import Offer_Card from "../Components/Cards/Cards.jsx";
+import ImagemLupa from '../../Assets/lupa-04.svg';
+import bgTreadmill from '../../Assets/bg_passadeira.png';
+import Offer_Card from "../../Components/Cards/Cards.jsx";
 
 function Offers() {
   const [offers, setOffers] = useState([]);
