@@ -27,11 +27,11 @@
     aspect-ratio: 1;
     height: 100%;
     width:auto;
-    background-color: var(--bg-alt);
+    background-color: var(--color-red);
     border-radius: 50%;
   }
   .unit:nth-child(2n) .pfp {
-    background-color: var(--color-white);
+    background-color: var(--color-orange);
   }
   .username{
     margin-left: 3%;

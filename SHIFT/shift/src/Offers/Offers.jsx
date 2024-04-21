@@ -98,7 +98,9 @@ function Offers() {
         <div className="PostList" id="Lending">
           <h2>Lending</h2>
           <Offer_Card username="JohnDoe" location="New York" />
-          
+          <Offer_Card username="JohnDoe" location="New York" />
+          <Offer_Card username="JohnDoe" location="New York" />
+
         </div>
 
         <div className="PostList" id="Borrowing">

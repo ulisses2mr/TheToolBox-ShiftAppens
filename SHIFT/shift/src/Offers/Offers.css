@@ -1,13 +1,14 @@
 body{
   overflow-x: hidden;
-}
-
-.offers_page {
   --color-brown: #191308;
   --color-white: #ecebe4;
   --color-red: #982c1f;
   --color-orange: #c1452d;
   --bg-alt: #c9c9c9;
+}
+
+.offers_page {
+  
   background-color: var(--color-brown);
   padding: 0;
   margin: 0;
