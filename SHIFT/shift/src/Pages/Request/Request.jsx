@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar.jsx";
 import "./Request.css";
 import ImagemLupa from "../../Assets/lupa-04.svg";
+import Butt from '../../Assets/boton.svg';
 
 function Requests_page() {
   const [offers, setOffers] = useState([]);
@@ -27,9 +28,9 @@ function Requests_page() {
           Write a message for the owner/asker!<br></br>
           <input type="text" id="Message_Box"></input>
           </div>
-          <div>
+          <div id="aaaa">
             <div id="balance"></div>
-            <button id="Submit"></button>
+            <img id="butao"  src={Butt} ></img>
           </div>
         </div>
       </div>

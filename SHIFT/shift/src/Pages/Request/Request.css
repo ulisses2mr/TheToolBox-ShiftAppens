@@ -1,5 +1,6 @@
 .requests_page{
     height: 80vh;
+    background-color: var(--color-white);
     --color-brown: #191308;
   --color-white: #ecebe4;
   --color-red: #982c1f;
@@ -105,8 +106,15 @@
     width: 100%;
     margin-top: 5%;
 }
+
+#aaaa{align-items: end;}
 #balance{
     width:30%;
     height:100%;
     background-color: var(--bg-alt);
+}
+
+
+#butao{
+    width:55%;
 }
