@@ -30,7 +30,7 @@ function Requests_page() {
           </div>
           <div id="aaaa">
             <div id="balance"></div>
-            <img id="butao"  src={Butt} ></img>
+            <a id="link" href="/offers"><img id="butao"  src={Butt} ></img></a>
           </div>
         </div>
       </div>
