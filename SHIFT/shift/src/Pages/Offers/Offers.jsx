@@ -9,7 +9,14 @@ function Offers() {
   const [offers, setOffers] = useState([]);
   const [requests, setRequests] = useState([]);
   const [userName, setUserName] = useState(null);
+  const [search_text, setSearch_text] = useState("");
   let users = {};
+  
+  const updateSearch_text = (event) => {
+    setSearch_text(event.target.value);
+    console.log(search_text);
+  };
+
 
   async function getUser(id) {
     try {
@@ -136,6 +143,7 @@ const getRequests = async () => {
   }
 }
 
+
   // Associar à Navbar
   const filterProposals = async () => {
     try {
@@ -174,8 +182,9 @@ const getRequests = async () => {
 
         <div className="search_bar">
           <div className="search_Backdrop"></div>
-
-          <input type="text" placeholder="Search.."></input>
+          <input type="text" placeholder="Search.."
+          value={search_text} 
+          onChange={updateSearch_text}></input>
           <button className="searchBtn">
             <img id="lupa" src={ImagemLupa} alt="lupa" />
           </button>
