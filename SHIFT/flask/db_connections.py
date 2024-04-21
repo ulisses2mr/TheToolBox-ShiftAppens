@@ -13,6 +13,16 @@ CORS(app, resources={r"/requests": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/user_info/1": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/user_info/2": {"origins": "http://localhost:3000"}})
 CORS(app, resources={r"/user_info/3": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/m": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/ma": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/mar": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/mart": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/b": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/be": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/ber": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/berb": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/mal": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/proposals/type/mala": {"origins": "http://localhost:3000"}})
 
 StatusCodes = {
     'success': 200,
