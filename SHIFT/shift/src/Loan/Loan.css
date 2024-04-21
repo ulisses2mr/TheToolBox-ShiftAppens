@@ -1,4 +1,7 @@
 
+body{
+    overflow: hidden    ;
+}
 .loan_page{
   position: absolute;
     height: 100vh;
@@ -9,7 +12,7 @@ display: flex;
 
 
 .form_loan{
-margin-top: 20%;
+margin-top: 15%;
 margin-left:5%;
 margin-bottom: 5%;
 display: flex;
