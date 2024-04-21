@@ -59,11 +59,13 @@ function Loan() {
             <Navbar />
             
             <div className="form_loan">
-                <h1>CREATE A POST</h1>
-                <select name="request_dropdown" className="dropdown_element" id="request_dropdown">
-                    <option value="request_option">Request</option>
-                    <option value="loan_option">Loan</option>
+           <div className="title_loan"> <h1>CREATE A </h1>   <select name="tool_dropdown"  id="button_request" onChange={(e) => setToll_type(e.target.value)}>
+                    <option value="hammer">REQUEST</option>
+                    <option value="tool case">LOAN</option>
+                   
                 </select>
+           </div>
+              
                 <select name="tool_dropdown" className="dropdown_element" id="tool_dropdown" onChange={(e) => setToll_type(e.target.value)}>
                     <option value="hammer">Hammer</option>
                     <option value="tool case">Tool Case</option>
@@ -73,7 +75,7 @@ function Loan() {
                     <option value="bosch">Bosch</option>
                     <option value="dexter">Dexter</option>
                 </select>
-                <button id="button_loan" onClick={handleSubmit}>SUBMIT</button>
+                <a id="button_loan" onClick={handleSubmit}><img  src={Butt} ></img></a>
             </div>
       
 

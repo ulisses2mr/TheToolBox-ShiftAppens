@@ -55,7 +55,7 @@ height: 70%;
 }
 #menu_logo:hover, #menu_icon:hover{
     cursor: pointer;
-    filter: opacity(50%);
+    filter:brightness(1000%)
    
    
 }
