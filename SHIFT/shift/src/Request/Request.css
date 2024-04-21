@@ -3,15 +3,21 @@
 }
 #Request_container{
     box-sizing: border-box;
-    padding-left: 7.5%;
+    padding-left: 10%;
+    padding-right: 7.5%;
     padding-top: 3%;
     display:flex;
     justify-content: space-between;
     height: 100%;
 }
-
+#user{
+    width:100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
 #tool_image{
-    width:30%;
+    width:40%;
     height: 96%;
     background-color: var(--bg-alt);
     display: flex;
@@ -21,5 +27,69 @@
 #tool_image img{
     height:90%;
     width:auto;
+    max-width:90%;
+}
+#left_section{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
+#pfp{
+    background-color: var(--color-orange);
+    border-radius: 50%;
+    height: 100%;
+    aspect-ratio: 1;
+    display: inline-block;
+
+}
+#userName{
+    display: inline-block;
+    margin-left: 4%;
+    color: var(--color-orange);
+    font-size: 1.5em;
+}
+
+#Request_name>h2{
+    margin-top: 0;
+    margin-left: 2%;
+    font-size: 2.5em;
+    color: var(--color-red);
+    display: inline-block;
+}
+
+#tool_name{
+    display: inline-block;
+    background-color: var(--bg-alt);
+    margin-left: 5%;
+    width: 50%;
+    color: var(--color-orange);
+    font-size: 1.5em;
+    font-weight: 500;
+    padding-left: 2% ;
+}
+#message{height:45%}
+#Message_Box{
+    box-sizing: border-box;
+    width: 100%;
+    height: 90%;
+    padding: 8px;
+    background-color: var(--bg-alt);
+    border: 0;
+}
+#Message_Box:focus{
+    outline:0;
+}
+
+#Request_container>div:last-child{
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+}
+#balance{
+    width:30%;
+    height:100%;
+    background-color: var(--bg-alt);
+}
